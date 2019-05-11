@@ -1,0 +1,24 @@
+<div class="container-fluid">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Certificate</th>
+          <th scope="col">Issued Date</th>
+          <th scope="col">Number of Shares</th>
+          <th scope="col">Number of Shares to Sell</th>
+          <th scope="col">Value of Shares</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let share of shares">
+          <th scope="row">{{share.certificateId}}</th>
+          <th scope="row">{{share.numberOfShares}}</th>          
+          <th scope="row">{{share.issuedDate | slice:6:18 }}</th>       
+          <th scope="row">to be filled</th>       
+          <th scope="row">to be filled</th>          
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

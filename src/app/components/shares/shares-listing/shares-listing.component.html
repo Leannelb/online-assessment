@@ -1,26 +1,83 @@
-<div class="container-fluid">
-    <div class="currentPrice" >
-      <h1>Current Share Price: {{currentSharePrice.value}}</h1></div>
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th scope="col">Certificate</th>
-          <th scope="col">Issued Date</th>
-          <th scope="col">Number of Shares</th>
-          <th scope="col">Number of Shares to Sell</th>
-          <th scope="col">Value of Shares</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let share of shares">
-          <th scope="row">{{share.certificateId}}</th>
-          <th scope="row">{{share.numberOfShares}}</th>          
-          <th scope="row">{{share.issuedDate | slice:6:18 }}</th>       
-          <th scope="row">to be filled</th>       
-          <th scope="row">to be filled</th>          
-        </tr>
-      </tbody>
-    </table>
-  </div>
+<div class="main-space">
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="currentPrice">
+				<h1>Current Share Price: {{ currentSharePrice?.value  | number: "1.2-2" }}</h1>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="table-responsive">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th scope="col">Certificate</th>
+							<th scope="col">Issued Date</th>
+							<th scope="col">Number of Shares</th>
+							<th scope="col">Number of Shares to Sell</th>
+							<th scope="col">Value of Shares</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let share of shares; let i = index" (click)="RowSelected(share)">
+							<td>{{ share.certificateId }}</td>
+							<td>{{ share.numberOfShares }}</td>
+							<td>{{ share.issuedDate | slice: 6:18 }}</td>
+							<td>
+								{{
+								currentSharePrice.value * share.numberOfShares | number: "1.2-2"
+								}}
+							</td>
+							<td>Value
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-6">
+			<div *ngIf="selectedShare">
+				<p class="selectedShare">
+					Share id {{ selectedShare.certificateId }}: Remaining shares: {{ selectedShare.numberOfShares }}
+				</p>
+			</div>
+		</div>
+		<div class="col-4">
+		<!-- <form [formGroup]="form" class="text" (ngSubmit)="onSubmit()">
+			Shares to sell:
+			<input type="number" name="sellShares" formControlName="sellShares"  [value]="calculateSellShares()"><br>
+
+		</form> -->
+		<form [formGroup]="form" (ngSubmit)="submit()">
+			
+				<div>
+					<label>Shares to trade:</label>
+					<input 
+					type="number" 
+					formControlName="numberOfShares" 
+					value="{{ share.numberOfShares }}"
+					>
+				</div>
+					<div>
+					<label>Shares to sell:</label>
+					<input type="number" formControlName="sellShares"
+				 [value]="calculatesellShares()">
+				</div>
+				<div>
+					<label>Purchase Price + TAX.</label>
+					<input type="number" formControlName="calculationShares" 
+				[value]="calculateShares()">
+				</div>
+			  <button type="submit">submit</button>
+			</form>
+		</div>
+		<div class="col-2">
+			<button type="button" class="btn btn-secondary selectedShare">
+				Sell Shares
+			</button>
+		</div>
+	</div>
 </div>

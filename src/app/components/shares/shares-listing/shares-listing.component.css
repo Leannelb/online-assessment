@@ -1,3 +1,14 @@
 .table-responsive {
     margin: 20px;
 }
+.selectedShare { 
+	margin: 20px;
+}
+.main-space{
+	padding: 3%;
+}
+h1 {
+	color: #fff;
+	padding: 5%;
+	font-size: 1.5rem;
+}

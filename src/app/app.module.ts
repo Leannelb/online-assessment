@@ -7,14 +7,12 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { SharesListingComponent } from './components/shares/shares-listing/shares-listing.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
-import { SharesListComponent } from './components/shares/shares-list/shares-list.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     SharesListingComponent,
-    SharesListComponent
   ],
   imports: [
     BrowserModule,
